@@ -1,14 +1,34 @@
+import { createPortal } from 'react-dom';
 import { Component } from 'react';
-import { ModalWindow, Overlay } from './Modal.styled';
+import { Close, ModalWindow, Overlay } from './Modal.styled';
 
+const modalRoot = document.getElementById('modal-root');
 export class Modal extends Component {
+  componentDidMount() {
+    document.addEventListener('keydown', this.closeModal);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.closeModal);
+  }
+
+  closeModal = ({ currentTarget, target, code }) => {
+    if (currentTarget === target || code === 'Escape') {
+      this.props.close();
+    }
+  };
   render() {
-    return (
-      <Overlay>
+    const { closeModal } = this;
+    const { children, close } = this.props;
+
+    return createPortal(
+      <Overlay onClick={closeModal}>
         <ModalWindow>
-          <span>X</span>
+          <Close onClick={close}>X</Close>
+          {children}
         </ModalWindow>
-      </Overlay>
+      </Overlay>,
+      modalRoot
     );
   }
 }

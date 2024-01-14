@@ -23,6 +23,7 @@ export const BtnSearch = styled.button`
   border-radius: 8px;
   color: #fff;
   background-color: #46adad;
+  margin-left: 5px;
 
   padding: 5px 7px;
 
@@ -36,7 +37,6 @@ export const BtnSearch = styled.button`
 `;
 
 export const Label = styled.label`
-  /* display: flex; */
   margin: 10px 0 5px 0;
 `;
 
@@ -45,4 +45,5 @@ export const FieldInput = styled(Field)`
   padding: 5px;
   border-radius: 8px;
   width: 200px;
+  color: #4d4242;
 `;

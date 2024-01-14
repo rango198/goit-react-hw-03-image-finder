@@ -4,6 +4,8 @@ import * as API from 'components/services/api';
 import { List } from './ImageGallery.styled';
 import { BtnWrapper } from 'components/Button/Button.styled';
 import { Button } from 'components/Button/Button';
+import { Modal } from 'components/Modal/Modal';
+import { ModalPicture } from 'components/Modal/Modal.styled';
 
 // const perPage = 12;
 
@@ -14,6 +16,8 @@ export class ImagesGalery extends Component {
     isLoading: false,
     error: '',
     totalPages: 0,
+    onModal: false,
+    selectImage: {},
   };
 
   async componentDidUpdate(prevProps, prevState) {
@@ -45,8 +49,23 @@ export class ImagesGalery extends Component {
     this.setState(({ page }) => ({ page: page + 1 }));
   };
 
+  showModal = (largeImageURL, tags) => {
+    this.setState({
+      onModal: true,
+      selectImage: {
+        largeImageURL,
+        tags,
+      },
+    });
+  };
+
+  closeModal = () => {
+    this.setState({ onModal: false, selectImage: {} });
+  };
+
   render() {
-    const { images, isLoading, error, page, totalPages } = this.state;
+    const { images, isLoading, error, page, totalPages, onModal, selectImage } =
+      this.state;
     return (
       <>
         {error && <h2>{error.message}</h2>}
@@ -54,7 +73,11 @@ export class ImagesGalery extends Component {
         <List>
           {images &&
             images.map(image => (
-              <ImageGalleryItem key={image.id} item={image} />
+              <ImageGalleryItem
+                key={image.id}
+                item={image}
+                showModal={this.showModal}
+              />
             ))}
         </List>
 
@@ -64,6 +87,14 @@ export class ImagesGalery extends Component {
               Load more
             </Button>
           </BtnWrapper>
+        )}
+        {onModal && (
+          <Modal close={this.closeModal}>
+            <ModalPicture
+              src={selectImage.largeImageURL}
+              alt={selectImage.tags}
+            />
+          </Modal>
         )}
       </>
     );
