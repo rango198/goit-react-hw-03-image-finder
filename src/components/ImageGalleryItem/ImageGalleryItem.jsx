@@ -1,8 +1,9 @@
-export const ImageGalleryItem = ({ id, tags, smallUrl }) => {
+export const ImageGalleryItem = ({ item }) => {
+  const { largeImageURL, tags, webformatURL } = item;
   return (
-    <li key={id}>
+    <li>
       <div>
-        <img src={smallUrl} alt={tags} loading="lazy" />
+        <img src={webformatURL} alt={tags} loading="lazy" />
       </div>
     </li>
   );
