@@ -1,11 +1,13 @@
+import { ImageItem, SmallImg } from './ImageGalleryItem.styled';
+
 export const ImageGalleryItem = ({ item, showModal }) => {
   const { largeImageURL, tags, webformatURL } = item;
 
   return (
-    <li onClick={() => showModal(largeImageURL, tags)}>
+    <ImageItem onClick={() => showModal(largeImageURL, tags)}>
       <div>
-        <img src={webformatURL} alt={tags} loading="lazy" />
+        <SmallImg src={webformatURL} alt={tags} loading="lazy" />
       </div>
-    </li>
+    </ImageItem>
   );
 };

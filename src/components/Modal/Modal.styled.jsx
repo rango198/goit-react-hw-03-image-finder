@@ -24,6 +24,7 @@ export const ModalWindow = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow: hidden;
 `;
 
 export const Close = styled.span`
@@ -40,4 +41,5 @@ export const ModalPicture = styled.img`
   width: 100%;
   height: 90%;
   object-fit: contain;
+  cursor: initial;
 `;

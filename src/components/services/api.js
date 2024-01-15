@@ -9,7 +9,7 @@ const URL = 'https://pixabay.com/api/';
 //   return response.data;
 // }
 
-export const getAllImages = async (searchText, page = 1) => {
+export const getAllImages = async (searchText, page) => {
   try {
     const response = await axios.get(`${URL}`, {
       params: {
