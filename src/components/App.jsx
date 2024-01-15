@@ -56,19 +56,24 @@ export class App extends Component {
   render() {
     const { images, isLoading, error, page, totalPages, textSearch } =
       this.state;
-    if (textSearch.length > 0 && images.length === 0) {
-      return (
-        <div>
-          <p>{`Oops... there are no images matching your search... `}</p>
-        </div>
-      );
-    }
+    // if (textSearch.length > 0 && images.length === 0) {
+    //   return (
+    //     <div>
+    //       <p>{`Oops... there are no images matching your search... `}</p>
+    //     </div>
+    //   );
+
     return (
       <div>
         {error && <h2>{error.message}</h2>}
         {isLoading && <Loader />}
         <SearchBar onSubmit={this.addtextSearch} />
         <ImagesGallery ListImages={images} />
+        {textSearch.length > 0 && images.length === 0 && (
+          <div>
+            <p>{`Oops... there are no images matching your search... `}</p>
+          </div>
+        )}
         {images.length > 0 && page <= totalPages && (
           <BtnWrapper>
             <Button onClick={this.LoadMore} type="button">
